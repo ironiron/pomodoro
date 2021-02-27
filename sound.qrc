@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sounds/act.wav</file>
+        <file>sounds/rest.wav</file>
+        <file>images/bad.png</file>
+        <file>images/heart.png</file>
+        <file>images/trash.png</file>
+    </qresource>
+</RCC>
