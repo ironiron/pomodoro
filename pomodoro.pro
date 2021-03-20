@@ -38,3 +38,5 @@ RESOURCES += \
 
 DISTFILES += \
     readme.txt
+
+RC_ICONS = heart.ico

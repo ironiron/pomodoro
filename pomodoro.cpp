@@ -44,6 +44,7 @@ pomodoro::~pomodoro()
 void pomodoro::handleTimeout()
 {
     QWidget::showNormal();
+    QWidget::setFocus();
     switch (current_state)
     {
     case ACT:
@@ -117,6 +118,7 @@ void pomodoro::on_pushButton_released()
         iteration=1;
         current_state=ACT;
         _timer.start(1000*60*(ui->spinBox->value()));
+        hide();
     }
     else
     {
