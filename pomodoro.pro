@@ -20,10 +20,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    pomodoro.cpp
+    pomodoro.cpp \
+    runguard.cpp
 
 HEADERS += \
-    pomodoro.h
+    pomodoro.h \
+    runguard.h
 
 FORMS += \
     pomodoro.ui

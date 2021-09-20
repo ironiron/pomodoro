@@ -23,6 +23,7 @@ private slots:
     void on_pushButton_released();
     void handleTimeout();
     void _updateUi();
+    void _hide_it();
 
 private:
     Ui::pomodoro *ui;

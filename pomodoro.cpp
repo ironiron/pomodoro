@@ -9,8 +9,7 @@
 #include <QCoreApplication>
 #include <QCloseEvent>
 #include <QIcon>
-
-//TODO refractor, rename, more general
+#include <QShortcut>
 
 enum state{ACT,REST,STOP}current_state;
 int break_nbr=0;
@@ -23,9 +22,20 @@ pomodoro::pomodoro(QWidget *parent)
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::WindowTitleHint |
                    Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
+
     ui->pushButton->setText("START");
     ui->radioButton_3->setChecked(true);
+    ui->pushButton->setFocus();
     current_state=STOP;
+
+    QShortcut *shotcut_button1 = new QShortcut(QKeySequence(Qt::Key_Enter),this);
+    QShortcut *shotcut_button2 = new QShortcut(QKeySequence(Qt::Key_Return),this);
+    QShortcut *shotcut_button3 = new QShortcut(QKeySequence(Qt::Key_Space),this);
+    QShortcut *shotcut_close = new QShortcut(QKeySequence(Qt::Key_Escape),this);
+    connect(shotcut_button1, SIGNAL(activated()), this, SLOT(on_pushButton_released()));
+    connect(shotcut_button2, SIGNAL(activated()), this, SLOT(on_pushButton_released()));
+    connect(shotcut_button3, SIGNAL(activated()), this, SLOT(on_pushButton_released()));
+    connect(shotcut_close, SIGNAL(activated()), this, SLOT(_hide_it()));
 
     connect(&_timer, &QTimer::timeout, this, &pomodoro::handleTimeout);
 
@@ -33,7 +43,7 @@ pomodoro::pomodoro(QWidget *parent)
     createTrayIcon();
     connect(trayIcon, &QSystemTrayIcon::activated, this, &pomodoro::iconActivated);
     trayIcon->show();
-
+    QWidget::activateWindow();
 }
 
 pomodoro::~pomodoro()
@@ -76,6 +86,11 @@ void pomodoro::handleTimeout()
         break;
     }
     _updateUi();
+}
+
+void pomodoro::_hide_it()
+{
+    hide();
 }
 
 void pomodoro::_updateUi()
@@ -131,7 +146,7 @@ void pomodoro::on_pushButton_released()
     }
     _updateUi();
 }
-/////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
 void pomodoro::closeEvent(QCloseEvent *event)
