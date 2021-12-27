@@ -1,3 +1,5 @@
+![screenshot](/images/screenshot.png)
+
 Resources authors:
 icon image is taken from Qt examples
 sounds from web:
